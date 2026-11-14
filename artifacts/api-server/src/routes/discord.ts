@@ -1,5 +1,5 @@
 import { Router, type IRouter } from "express";
-import { client } from "../bot/index";
+import { client, botState } from "../bot/index";
 
 const router: IRouter = Router();
 
@@ -25,6 +25,18 @@ router.get("/discord/invite", (_req, res) => {
   res.json({
     applicationId,
     url: `https://discord.com/oauth2/authorize?${params.toString()}`,
+  });
+});
+
+router.get("/discord/status", (_req, res) => {
+  const ready = client.isReady();
+  res.json({
+    status: ready ? "online" : botState.status,
+    error: botState.error,
+    tag: client.user?.tag ?? null,
+    applicationId: client.user?.id ?? null,
+    guilds: ready ? client.guilds.cache.size : 0,
+    ping: ready ? client.ws.ping : null,
   });
 });
 

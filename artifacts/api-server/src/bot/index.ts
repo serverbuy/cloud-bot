@@ -16,9 +16,21 @@ export const client = new Client({
   partials: [Partials.Channel, Partials.Message],
 });
 
+export const botState: { status: "starting" | "online" | "error" | "disabled"; error: string | null } = {
+  status: "starting",
+  error: null,
+};
+
+client.once("clientReady", () => {
+  botState.status = "online";
+  botState.error = null;
+});
+
 export async function startBot() {
-  const token = process.env["DISCORD_BOT_TOKEN"];
+  const token = process.env["DISCORD_BOT_TOKEN"]?.trim();
   if (!token) {
+    botState.status = "error";
+    botState.error = "DISCORD_BOT_TOKEN is not set";
     logger.error("DISCORD_BOT_TOKEN is not set");
     return;
   }
@@ -26,6 +38,12 @@ export async function startBot() {
   registerEvents(client);
   await registerCommands(token);
 
-  await client.login(token);
-  logger.info("Discord bot logged in");
+  try {
+    await client.login(token);
+    logger.info("Discord bot logged in");
+  } catch (err) {
+    botState.status = "error";
+    botState.error = err instanceof Error ? err.message : String(err);
+    logger.error({ err }, "Discord login failed");
+  }
 }

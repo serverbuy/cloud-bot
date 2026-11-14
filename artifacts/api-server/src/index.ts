@@ -1,6 +1,6 @@
 import app from "./app";
 import { logger } from "./lib/logger";
-import { startBot } from "./bot/index";
+import { startBot, botState } from "./bot/index";
 
 const rawPort = process.env["PORT"];
 
@@ -38,5 +38,7 @@ if (!isDev || forceDev) {
     logger.error({ err }, "Failed to start Discord bot");
   });
 } else {
+  botState.status = "disabled";
+  botState.error = "NODE_ENV=development – bot disabled";
   logger.info("Dev mode: Discord bot disabled (production VM handles commands). Set BOT_DEV=true to run locally.");
 }
