@@ -13,7 +13,7 @@ const NEKOS_MAP: Record<string, string> = {
   bonk: "poke", lick: "nom",
 };
 
-async function fetchGif(action: string): Promise<string | null> {
+export async function fetchGif(action: string): Promise<string | null> {
   const timeout = AbortSignal.timeout(5000);
 
   // Primary: nekos.best

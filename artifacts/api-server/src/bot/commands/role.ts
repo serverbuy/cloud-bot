@@ -47,7 +47,7 @@ export const roleCommand = {
     const role = interaction.options.getRole("role");
 
     if (!target) {
-      await interaction.reply({ content: "❌ Mitglied nicht gefunden.", ephemeral: true });
+      await interaction.reply({ content: "Mitglied nicht gefunden.", ephemeral: true });
       return;
     }
 
@@ -58,21 +58,21 @@ export const roleCommand = {
         .map((r) => r.toString())
         .join(", ") || "Keine Rollen";
       await interaction.reply({
-        content: `📋 Rollen von ${target}: ${roles}`,
+        content: `Rollen von ${target}: ${roles}`,
         ephemeral: true,
       });
       return;
     }
 
     if (!role) {
-      await interaction.reply({ content: "❌ Rolle nicht gefunden.", ephemeral: true });
+      await interaction.reply({ content: "Rolle nicht gefunden.", ephemeral: true });
       return;
     }
 
     const botMember = interaction.guild?.members.me;
     if (!botMember || botMember.roles.highest.position <= (role as any).position) {
       await interaction.reply({
-        content: "❌ Die Rolle ist höher als meine eigene Rolle.",
+        content: "Die Rolle ist höher als meine eigene Rolle.",
         ephemeral: true,
       });
       return;
@@ -81,13 +81,13 @@ export const roleCommand = {
     if (sub === "add") {
       await target.roles.add(role as any);
       await interaction.reply({
-        content: `✅ Rolle ${role} wurde ${target} gegeben.`,
+        content: `Rolle ${role} wurde ${target} gegeben.`,
         ephemeral: true,
       });
     } else if (sub === "remove") {
       await target.roles.remove(role as any);
       await interaction.reply({
-        content: `✅ Rolle ${role} wurde ${target} entfernt.`,
+        content: `Rolle ${role} wurde ${target} entfernt.`,
         ephemeral: true,
       });
     }

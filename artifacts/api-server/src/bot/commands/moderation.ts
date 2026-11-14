@@ -21,16 +21,16 @@ const kick = {
     const target = interaction.options.getMember("user") as GuildMember | null;
     const reason = interaction.options.getString("reason") ?? "Kein Grund angegeben";
     if (!target) {
-      await interaction.reply({ content: "❌ Mitglied nicht gefunden.", ephemeral: true });
+      await interaction.reply({ content: "Mitglied nicht gefunden.", ephemeral: true });
       return;
     }
     if (!target.kickable) {
-      await interaction.reply({ content: "❌ Ich kann dieses Mitglied nicht kicken.", ephemeral: true });
+      await interaction.reply({ content: "Ich kann dieses Mitglied nicht kicken.", ephemeral: true });
       return;
     }
     await target.kick(reason);
     const embed = new EmbedBuilder()
-      .setTitle("👢 Mitglied gekickt")
+      .setTitle("Mitglied gekickt")
       .addFields(
         { name: "Mitglied", value: target.user.tag, inline: true },
         { name: "Moderator", value: interaction.user.tag, inline: true },
@@ -66,16 +66,16 @@ const ban = {
     const reason = interaction.options.getString("reason") ?? "Kein Grund angegeben";
     const deleteDays = interaction.options.getInteger("delete_days") ?? 0;
     if (!target) {
-      await interaction.reply({ content: "❌ Mitglied nicht gefunden.", ephemeral: true });
+      await interaction.reply({ content: "Mitglied nicht gefunden.", ephemeral: true });
       return;
     }
     if (!target.bannable) {
-      await interaction.reply({ content: "❌ Ich kann dieses Mitglied nicht bannen.", ephemeral: true });
+      await interaction.reply({ content: "Ich kann dieses Mitglied nicht bannen.", ephemeral: true });
       return;
     }
     await target.ban({ reason, deleteMessageSeconds: deleteDays * 86400 });
     const embed = new EmbedBuilder()
-      .setTitle("🔨 Mitglied gebannt")
+      .setTitle("Mitglied gebannt")
       .addFields(
         { name: "Mitglied", value: target.user.tag, inline: true },
         { name: "Moderator", value: interaction.user.tag, inline: true },
@@ -99,9 +99,9 @@ const unban = {
     const userId = interaction.options.getString("user_id")!;
     try {
       await interaction.guild!.members.unban(userId);
-      await interaction.reply({ content: `✅ Nutzer \`${userId}\` wurde entbannt.` });
+      await interaction.reply({ content: `Nutzer \`${userId}\` wurde entbannt.` });
     } catch {
-      await interaction.reply({ content: "❌ Nutzer nicht gefunden oder nicht gebannt.", ephemeral: true });
+      await interaction.reply({ content: "Nutzer nicht gefunden oder nicht gebannt.", ephemeral: true });
     }
   },
 };
@@ -130,16 +130,16 @@ const timeout = {
     const minutes = interaction.options.getInteger("minutes")!;
     const reason = interaction.options.getString("reason") ?? "Kein Grund angegeben";
     if (!target) {
-      await interaction.reply({ content: "❌ Mitglied nicht gefunden.", ephemeral: true });
+      await interaction.reply({ content: "Mitglied nicht gefunden.", ephemeral: true });
       return;
     }
     if (minutes === 0) {
       await target.timeout(null);
-      await interaction.reply({ content: `✅ Timeout von ${target} aufgehoben.` });
+      await interaction.reply({ content: `Timeout von ${target} aufgehoben.` });
     } else {
       await target.timeout(minutes * 60 * 1000, reason);
       const embed = new EmbedBuilder()
-        .setTitle("🔇 Mitglied getimeouted")
+        .setTitle("Mitglied getimeouted")
         .addFields(
           { name: "Mitglied", value: target.user.tag, inline: true },
           { name: "Dauer", value: `${minutes} Minuten`, inline: true },
@@ -182,7 +182,7 @@ const purge = {
     const channel = interaction.channel as any;
     const deleted = await channel.bulkDelete(toDelete, true);
     await interaction.editReply({
-      content: `✅ ${deleted.size} Nachrichten gelöscht.`,
+      content: `${deleted.size} Nachrichten gelöscht.`,
     });
   },
 };
@@ -202,7 +202,7 @@ const warn = {
     const target = interaction.options.getUser("user")!;
     const reason = interaction.options.getString("reason")!;
     const embed = new EmbedBuilder()
-      .setTitle("⚠️ Mitglied verwarnt")
+      .setTitle("Mitglied verwarnt")
       .addFields(
         { name: "Mitglied", value: target.tag, inline: true },
         { name: "Moderator", value: interaction.user.tag, inline: true },
@@ -214,7 +214,7 @@ const warn = {
 
     try {
       await target.send(
-        `⚠️ Du wurdest auf **${interaction.guild?.name}** verwarnt.\n**Grund:** ${reason}`
+        `Du wurdest auf **${interaction.guild?.name}** verwarnt.\n**Grund:** ${reason}`
       );
     } catch {
       // DM disabled

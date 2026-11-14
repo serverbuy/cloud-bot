@@ -24,7 +24,10 @@ export const commands = [
 ];
 
 // Commands that also work as a user-installed app (DMs, group chats, other servers).
-const EVERYWHERE = new Set(["ping", "avatar", "botinfo", "userinfo", "8ball", "coinflip", "dice", "ship", "choose"]);
+const EVERYWHERE = new Set([
+  "ping", "avatar", "botinfo", "userinfo",
+  ...funCommands.map((c) => c.data.name),
+]);
 
 export function commandPayload() {
   return commands.map((c) => {

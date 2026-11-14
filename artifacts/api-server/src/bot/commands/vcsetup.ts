@@ -44,7 +44,7 @@ export const vcSetupCommand = {
       vcCreateChannels.set(guildId, channel.id);
 
       const embed = new EmbedBuilder()
-        .setTitle("✅ VC-Create System eingerichtet")
+        .setTitle("VC-Create System eingerichtet")
         .setDescription(
           `Wenn ein Mitglied ${channel} joined, wird automatisch ein temporärer Voice-Kanal erstellt.`
         )
@@ -58,12 +58,12 @@ export const vcSetupCommand = {
     if (sub === "status") {
       const channelId = vcCreateChannels.get(guildId);
       if (!channelId) {
-        await interaction.reply({ content: "❌ Kein VC-Create Kanal konfiguriert.", ephemeral: true });
+        await interaction.reply({ content: "Kein VC-Create Kanal konfiguriert.", ephemeral: true });
         return;
       }
       const channel = interaction.guild?.channels.cache.get(channelId);
       await interaction.reply({
-        content: `📢 Aktueller Join-to-Create Kanal: ${channel ?? `<#${channelId}>`}`,
+        content: `Aktueller Join-to-Create Kanal: ${channel ?? `<#${channelId}>`}`,
         ephemeral: true,
       });
       return;
@@ -71,7 +71,7 @@ export const vcSetupCommand = {
 
     if (sub === "remove") {
       vcCreateChannels.delete(guildId);
-      await interaction.reply({ content: "✅ VC-Create System wurde deaktiviert.", ephemeral: true });
+      await interaction.reply({ content: "VC-Create System wurde deaktiviert.", ephemeral: true });
     }
   },
 };

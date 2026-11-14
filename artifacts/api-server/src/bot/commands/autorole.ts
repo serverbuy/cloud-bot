@@ -40,14 +40,14 @@ export const autoRoleCommand = {
       const botMember = interaction.guild?.members.me;
       if (!botMember || botMember.roles.highest.position <= (role as any).position) {
         await interaction.reply({
-          content: "❌ Die Rolle ist höher als meine eigene Rolle. Bitte wähle eine niedrigere Rolle.",
+          content: "Die Rolle ist höher als meine eigene Rolle. Bitte wähle eine niedrigere Rolle.",
           ephemeral: true,
         });
         return;
       }
       autoRoleSettings.set(guildId, role.id);
       const embed = new EmbedBuilder()
-        .setTitle("✅ Auto-Role gesetzt")
+        .setTitle("Auto-Role gesetzt")
         .setDescription(`Neue Mitglieder erhalten automatisch die Rolle ${role} beim Beitreten.`)
         .setColor(0x57f287)
         .setTimestamp();
@@ -57,19 +57,19 @@ export const autoRoleCommand = {
 
     if (sub === "remove") {
       autoRoleSettings.delete(guildId);
-      await interaction.reply({ content: "✅ Auto-Role wurde deaktiviert.", ephemeral: true });
+      await interaction.reply({ content: "Auto-Role wurde deaktiviert.", ephemeral: true });
       return;
     }
 
     if (sub === "status") {
       const roleId = autoRoleSettings.get(guildId);
       if (!roleId) {
-        await interaction.reply({ content: "❌ Keine Auto-Role konfiguriert.", ephemeral: true });
+        await interaction.reply({ content: "Keine Auto-Role konfiguriert.", ephemeral: true });
         return;
       }
       const role = interaction.guild?.roles.cache.get(roleId);
       await interaction.reply({
-        content: `🎭 Aktuelle Auto-Role: ${role ?? `<@&${roleId}>`}`,
+        content: `Aktuelle Auto-Role: ${role ?? `<@&${roleId}>`}`,
         ephemeral: true,
       });
     }

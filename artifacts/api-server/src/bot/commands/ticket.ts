@@ -61,7 +61,7 @@ export const ticketCommand = {
     if (sub === "setup") {
       const title = interaction.options.getString("title") ?? "Support Ticket";
       const embed = new EmbedBuilder()
-        .setTitle(`🎫 ${title}`)
+        .setTitle(`${title}`)
         .setDescription(
           "Klicke auf den Button unten, um ein Ticket zu öffnen.\nUnser Team wird sich so schnell wie möglich um dein Anliegen kümmern."
         )
@@ -74,7 +74,6 @@ export const ticketCommand = {
           .setCustomId("ticket_create")
           .setLabel("Ticket erstellen")
           .setStyle(ButtonStyle.Primary)
-          .setEmoji("🎫")
       );
 
       await interaction.reply({
@@ -87,12 +86,12 @@ export const ticketCommand = {
     if (sub === "close") {
       const channel = interaction.channel as TextChannel;
       if (!channel.name.startsWith("ticket-")) {
-        await interaction.reply({ content: "❌ Das ist kein Ticket-Kanal.", ephemeral: true });
+        await interaction.reply({ content: "Das ist kein Ticket-Kanal.", ephemeral: true });
         return;
       }
 
       const embed = new EmbedBuilder()
-        .setTitle("🔒 Ticket wird geschlossen")
+        .setTitle("Ticket wird geschlossen")
         .setDescription("Dieses Ticket wird in 5 Sekunden gelöscht.")
         .setColor(0xff0000);
 
@@ -109,7 +108,7 @@ export const ticketCommand = {
         SendMessages: true,
         ReadMessageHistory: true,
       });
-      await interaction.reply({ content: `✅ ${user} wurde zum Ticket hinzugefügt.`, ephemeral: true });
+      await interaction.reply({ content: `${user} wurde zum Ticket hinzugefügt.`, ephemeral: true });
       return;
     }
 
@@ -117,7 +116,7 @@ export const ticketCommand = {
       const user = interaction.options.getUser("user")!;
       const channel = interaction.channel as TextChannel;
       await channel.permissionOverwrites.delete(user);
-      await interaction.reply({ content: `✅ ${user} wurde aus dem Ticket entfernt.`, ephemeral: true });
+      await interaction.reply({ content: `${user} wurde aus dem Ticket entfernt.`, ephemeral: true });
       return;
     }
   },

@@ -29,24 +29,24 @@ const userinfo = {
       : "—";
 
     const embed = new EmbedBuilder()
-      .setTitle(`👤 ${user.tag}`)
+      .setTitle(`${user.tag}`)
       .setThumbnail(user.displayAvatarURL())
       .addFields(
-        { name: "🆔 User-ID", value: user.id, inline: true },
-        { name: "🤖 Bot", value: user.bot ? "Ja" : "Nein", inline: true },
+        { name: "User-ID", value: user.id, inline: true },
+        { name: "Bot", value: user.bot ? "Ja" : "Nein", inline: true },
         {
-          name: "📅 Account erstellt",
+          name: "Account erstellt",
           value: `<t:${Math.floor(user.createdTimestamp / 1000)}:R>`,
           inline: true,
         },
         {
-          name: "📥 Server beigetreten",
+          name: "Server beigetreten",
           value: target?.joinedTimestamp
             ? `<t:${Math.floor(target.joinedTimestamp / 1000)}:R>`
             : "Unbekannt",
           inline: true,
         },
-        { name: "🎭 Rollen", value: roles }
+        { name: "Rollen", value: roles }
       )
       .setColor(0x5865f2)
       .setTimestamp();
@@ -64,22 +64,22 @@ const serverinfo = {
     await guild.fetch();
 
     const embed = new EmbedBuilder()
-      .setTitle(`🏠 ${guild.name}`)
+      .setTitle(`${guild.name}`)
       .setThumbnail(guild.iconURL())
       .addFields(
-        { name: "🆔 Server-ID", value: guild.id, inline: true },
-        { name: "👑 Besitzer", value: `<@${guild.ownerId}>`, inline: true },
-        { name: "👥 Mitglieder", value: guild.memberCount.toString(), inline: true },
-        { name: "📢 Kanäle", value: guild.channels.cache.size.toString(), inline: true },
-        { name: "🎭 Rollen", value: guild.roles.cache.size.toString(), inline: true },
-        { name: "😀 Emojis", value: guild.emojis.cache.size.toString(), inline: true },
+        { name: "Server-ID", value: guild.id, inline: true },
+        { name: "Besitzer", value: `<@${guild.ownerId}>`, inline: true },
+        { name: "Mitglieder", value: guild.memberCount.toString(), inline: true },
+        { name: "Kanäle", value: guild.channels.cache.size.toString(), inline: true },
+        { name: "Rollen", value: guild.roles.cache.size.toString(), inline: true },
+        { name: "Emojis", value: guild.emojis.cache.size.toString(), inline: true },
         {
-          name: "📅 Erstellt",
+          name: "Erstellt",
           value: `<t:${Math.floor(guild.createdTimestamp / 1000)}:R>`,
           inline: true,
         },
         {
-          name: "🔒 Verifizierungsstufe",
+          name: "Verifizierungsstufe",
           value: ["Keine", "Niedrig", "Mittel", "Hoch", "Sehr hoch"][guild.verificationLevel],
           inline: true,
         }
@@ -101,7 +101,7 @@ const avatar = {
   async execute(interaction: ChatInputCommandInteraction) {
     const user = interaction.options.getUser("user") ?? interaction.user;
     const embed = new EmbedBuilder()
-      .setTitle(`🖼️ Avatar von ${user.tag}`)
+      .setTitle(`Avatar von ${user.tag}`)
       .setImage(user.displayAvatarURL({ size: 512 }))
       .setColor(0x5865f2);
     await interaction.reply({ embeds: [embed] });
@@ -120,15 +120,15 @@ const botinfo = {
     const s = Math.floor(uptime % 60);
 
     const embed = new EmbedBuilder()
-      .setTitle(`🤖 ${client.user?.tag}`)
+      .setTitle(`${client.user?.tag}`)
       .setThumbnail(client.user?.displayAvatarURL() ?? null)
       .addFields(
-        { name: "📡 Ping", value: `${client.ws.ping}ms`, inline: true },
+        { name: "Ping", value: `${client.ws.ping}ms`, inline: true },
         { name: "⏱️ Uptime", value: `${h}h ${m}m ${s}s`, inline: true },
-        { name: "🏠 Server", value: client.guilds.cache.size.toString(), inline: true },
-        { name: "👥 Nutzer", value: client.users.cache.size.toString(), inline: true },
+        { name: "Server", value: client.guilds.cache.size.toString(), inline: true },
+        { name: "Nutzer", value: client.users.cache.size.toString(), inline: true },
         {
-          name: "📦 discord.js",
+          name: "discord.js",
           value: "v14",
           inline: true,
         }
@@ -145,10 +145,10 @@ const ping = {
     .setName("ping")
     .setDescription("Zeigt die Bot-Latenz"),
   async execute(interaction: ChatInputCommandInteraction) {
-    const sent = await interaction.reply({ content: "🏓 Pong!", fetchReply: true });
+    const sent = await interaction.reply({ content: "Pong!", fetchReply: true });
     const latency = (sent as any).createdTimestamp - interaction.createdTimestamp;
     await interaction.editReply(
-      `🏓 Pong! Latenz: **${latency}ms** | API: **${interaction.client.ws.ping}ms**`
+      `Pong! Latenz: **${latency}ms** | API: **${interaction.client.ws.ping}ms**`
     );
   },
 };
