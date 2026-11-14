@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: cloud-bot
+    runtime: node
+    plan: free
+    buildCommand: corepack enable && pnpm install --frozen-lockfile && pnpm --filter @workspace/api-server run build
+    startCommand: pnpm --filter @workspace/api-server run start
+    healthCheckPath: /api/healthz
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: NODE_ENV
+        value: production
+      - key: DISCORD_BOT_TOKEN
+        sync: false

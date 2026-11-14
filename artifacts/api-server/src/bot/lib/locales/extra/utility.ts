@@ -1,0 +1,105 @@
+import type { Lang } from "../../i18n";
+
+const en = {
+  calcProvide: "❌ Provide an expression.",
+  calcOnlyNumbers: "❌ Only numbers and + - * / ( ) % allowed.",
+  calcTitle: "Calculator",
+  calcInvalid: "❌ Invalid expression.",
+  provideText: "❌ Provide text.",
+  invalidBase64: "❌ Invalid Base64.",
+  countTitle: "Count",
+  countResult: (chars: number, words: number) => `**${chars}** characters, **${words}** words`,
+  sentToDms: "Sent to your DMs!",
+  enableDms: "Enable DMs.",
+  invalidHex: "❌ Invalid hex color.",
+  thisWord: "this",
+  chanceTitle: "Chance",
+  chanceResult: (thing: string, pct: number) => `**${thing}**: ${pct}%`,
+  repeatUsage: "❌ Usage: `,repeat 3 hello`",
+  randomTitle: "Random",
+  randomResult: (lo: number, hi: number, result: number) => `Number between **${lo}** and **${hi}**: **${result}**`,
+};
+
+type Strings = typeof en;
+
+const de: Strings = {
+  calcProvide: "❌ Gib eine Rechnung an.",
+  calcOnlyNumbers: "❌ Nur Zahlen und + - * / ( ) % erlaubt.",
+  calcTitle: "Taschenrechner",
+  calcInvalid: "❌ Ungültige Rechnung.",
+  provideText: "❌ Gib Text an.",
+  invalidBase64: "❌ Ungültiges Base64.",
+  countTitle: "Zählen",
+  countResult: (chars: number, words: number) => `**${chars}** Zeichen, **${words}** Wörter`,
+  sentToDms: "In deine DMs gesendet!",
+  enableDms: "Aktiviere DMs.",
+  invalidHex: "❌ Ungültige Hex-Farbe.",
+  thisWord: "das",
+  chanceTitle: "Chance",
+  chanceResult: (thing: string, pct: number) => `**${thing}**: ${pct}%`,
+  repeatUsage: "❌ Nutzung: `,repeat 3 hallo`",
+  randomTitle: "Zufall",
+  randomResult: (lo: number, hi: number, result: number) => `Zahl zwischen **${lo}** und **${hi}**: **${result}**`,
+};
+
+const sv: Strings = {
+  calcProvide: "❌ Ange ett uttryck.",
+  calcOnlyNumbers: "❌ Endast siffror och + - * / ( ) % tillåtna.",
+  calcTitle: "Miniräknare",
+  calcInvalid: "❌ Ogiltigt uttryck.",
+  provideText: "❌ Ange text.",
+  invalidBase64: "❌ Ogiltig Base64.",
+  countTitle: "Räkna",
+  countResult: (chars: number, words: number) => `**${chars}** tecken, **${words}** ord`,
+  sentToDms: "Skickat till dina DM!",
+  enableDms: "Aktivera DM.",
+  invalidHex: "❌ Ogiltig hex-färg.",
+  thisWord: "detta",
+  chanceTitle: "Chans",
+  chanceResult: (thing: string, pct: number) => `**${thing}**: ${pct}%`,
+  repeatUsage: "❌ Användning: `,repeat 3 hello`",
+  randomTitle: "Slump",
+  randomResult: (lo: number, hi: number, result: number) => `Tal mellan **${lo}** och **${hi}**: **${result}**`,
+};
+
+const nl: Strings = {
+  calcProvide: "❌ Geef een uitdrukking op.",
+  calcOnlyNumbers: "❌ Alleen cijfers en + - * / ( ) % toegestaan.",
+  calcTitle: "Rekenmachine",
+  calcInvalid: "❌ Ongeldige uitdrukking.",
+  provideText: "❌ Geef tekst op.",
+  invalidBase64: "❌ Ongeldige Base64.",
+  countTitle: "Tellen",
+  countResult: (chars: number, words: number) => `**${chars}** tekens, **${words}** woorden`,
+  sentToDms: "Verzonden naar je DM's!",
+  enableDms: "Schakel DM's in.",
+  invalidHex: "❌ Ongeldige hex-kleur.",
+  thisWord: "dit",
+  chanceTitle: "Kans",
+  chanceResult: (thing: string, pct: number) => `**${thing}**: ${pct}%`,
+  repeatUsage: "❌ Gebruik: `,repeat 3 hello`",
+  randomTitle: "Willekeurig",
+  randomResult: (lo: number, hi: number, result: number) => `Getal tussen **${lo}** en **${hi}**: **${result}**`,
+};
+
+const ar: Strings = {
+  calcProvide: "❌ قدّم تعبيرًا حسابيًا.",
+  calcOnlyNumbers: "❌ يُسمح فقط بالأرقام و + - * / ( ) %.",
+  calcTitle: "آلة حاسبة",
+  calcInvalid: "❌ تعبير غير صالح.",
+  provideText: "❌ قدّم نصًا.",
+  invalidBase64: "❌ Base64 غير صالح.",
+  countTitle: "عدّ",
+  countResult: (chars: number, words: number) => `**${chars}** حرف، **${words}** كلمة`,
+  sentToDms: "تم الإرسال إلى رسائلك الخاصة!",
+  enableDms: "فعّل الرسائل الخاصة.",
+  invalidHex: "❌ لون سداسي غير صالح.",
+  thisWord: "هذا",
+  chanceTitle: "احتمال",
+  chanceResult: (thing: string, pct: number) => `**${thing}**: ${pct}%`,
+  repeatUsage: "❌ الاستخدام: `,repeat 3 hello`",
+  randomTitle: "عشوائي",
+  randomResult: (lo: number, hi: number, result: number) => `رقم بين **${lo}** و **${hi}**: **${result}**`,
+};
+
+export const utility: Record<Lang, Strings> = { en, de, sv, nl, ar };
