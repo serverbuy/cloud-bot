@@ -2,6 +2,8 @@ import { Client, GatewayIntentBits, Partials, Collection } from "discord.js";
 import { logger } from "../lib/logger";
 import { registerEvents } from "./events";
 import { registerCommands } from "./commands/register";
+import { initStore } from "./lib/store";
+import { startReminderLoop } from "./commands/tools";
 
 export const client = new Client({
   intents: [
@@ -21,9 +23,11 @@ export const botState: { status: "starting" | "online" | "error" | "disabled"; e
   error: null,
 };
 
-client.once("clientReady", () => {
+client.once("clientReady", async () => {
   botState.status = "online";
   botState.error = null;
+  await initStore(client);
+  startReminderLoop(client);
 });
 
 export async function startBot() {

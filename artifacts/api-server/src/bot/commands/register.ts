@@ -10,6 +10,7 @@ import { autoRoleCommand } from "./autorole";
 import { createRolesCommand } from "./createRoles";
 import { createTeamCommand } from "./createTeam";
 import { funCommands } from "./fun";
+import { toolCommands } from "./tools";
 
 export const commands = [
   roleCommand,
@@ -21,12 +22,14 @@ export const commands = [
   ...moderationCommands,
   ...infoCommands,
   ...funCommands,
+  ...toolCommands,
 ];
 
 // Commands that also work as a user-installed app (DMs, group chats, other servers).
 const EVERYWHERE = new Set([
   "ping", "avatar", "botinfo", "userinfo",
   ...funCommands.map((c) => c.data.name),
+  ...toolCommands.map((c) => c.data.name),
 ]);
 
 export function commandPayload() {
