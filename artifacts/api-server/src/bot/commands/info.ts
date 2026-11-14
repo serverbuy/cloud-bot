@@ -14,16 +14,19 @@ const userinfo = {
       o.setName("user").setDescription("Mitglied (leer = du selbst)").setRequired(false)
     ),
   async execute(interaction: ChatInputCommandInteraction) {
-    const target =
-      (interaction.options.getMember("user") as GuildMember | null) ??
-      (interaction.member as GuildMember);
-    const user = target.user;
-    const roles = target.roles.cache
-      .filter((r) => r.id !== interaction.guildId)
-      .sort((a, b) => b.position - a.position)
-      .map((r) => r.toString())
-      .slice(0, 10)
-      .join(", ") || "Keine";
+    const user = interaction.options.getUser("user") ?? interaction.user;
+    const rawMember = interaction.options.getUser("user")
+      ? interaction.options.getMember("user")
+      : interaction.member;
+    const target = rawMember instanceof GuildMember ? rawMember : null;
+    const roles = target
+      ? target.roles.cache
+          .filter((r) => r.id !== interaction.guildId)
+          .sort((a, b) => b.position - a.position)
+          .map((r) => r.toString())
+          .slice(0, 10)
+          .join(", ") || "Keine"
+      : "—";
 
     const embed = new EmbedBuilder()
       .setTitle(`👤 ${user.tag}`)
@@ -38,7 +41,7 @@ const userinfo = {
         },
         {
           name: "📥 Server beigetreten",
-          value: target.joinedTimestamp
+          value: target?.joinedTimestamp
             ? `<t:${Math.floor(target.joinedTimestamp / 1000)}:R>`
             : "Unbekannt",
           inline: true,
